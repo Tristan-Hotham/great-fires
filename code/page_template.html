@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Great Fires</title>
+<meta name="description" content="Before 1900 many English towns burned. Did the towns that burned rebuild bigger? A record of {{record.great_fires|int}} great town fires from Wikipedia, compared with Census 2021 and ONS income figures.">
+<meta property="og:title" content="Great fires: did the towns that burned rebuild bigger?">
+<meta property="og:description" content="{{record.great_fires|int}} great town fires, {{record.share_1600s_1700s|pct}} of them in the 1600s and 1700s. Today the burned towns are neither clearly bigger nor richer than towns like them.">
+<meta property="og:image" content="https://tristan-hotham.github.io/great-fires/header.png">
+<meta property="og:url" content="https://tristan-hotham.github.io/great-fires/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Pale smoke and ash, ember orange for the fires, charred black for type. Slate for towns with no recorded fire. */
+:root{
+  --bg:#F2EFEA; --panel:#E7E2DB; --fg:#1C1816; --muted:#615953; --rule:#D8D1C8; --card:#FBF9F6; --border:#C6BDB2;
+  --hot:#C2410C; --cold:#5E6670; --gold:#B7791F;
+  --c0:#9C8C7E; --c16:#EDB458; --c17:#E2702A; --c18:#B8360E; --c19:#5E1C08; --poss:#C2410C; --war:#7A746E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#161311; --panel:#201B18; --fg:#EFE9E3; --muted:#A99F96; --rule:#342D28; --card:#1C1815; --border:#463D36;
+  --hot:#F0703A; --cold:#9AA4AE; --gold:#E0A93E;
+  --c0:#8A7C70; --c16:#F2C46E; --c17:#F08A45; --c18:#E0532A; --c19:#FFB59A; --poss:#F0703A; --war:#8E8780; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161311; --panel:#201B18; --fg:#EFE9E3; --muted:#A99F96; --rule:#342D28; --card:#1C1815; --border:#463D36;
+  --hot:#F0703A; --cold:#9AA4AE; --gold:#E0A93E;
+  --c0:#8A7C70; --c16:#F2C46E; --c17:#F08A45; --c18:#E0532A; --c19:#FFB59A; --poss:#F0703A; --war:#8E8780; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:680px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1080px,calc(100vw - 32px));margin-left:calc((100% - min(1080px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--hot);color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(52px,13vw,112px)/.86 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance;font-variation-settings:"SOFT" 50}
+h1 em{font-style:normal;color:var(--hot)}
+.mark{width:clamp(96px,22vw,190px);height:auto;display:block}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:46ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:52px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(28px,6vw,40px)/1 var(--display);color:var(--fg)}
+.stats b.h{color:var(--hot)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:290px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.slider{display:flex;gap:10px;align-items:center;flex:1 1 260px;min-width:0}
+.slider input{flex:1;min-width:0;accent-color:var(--hot)}
+.yearbig{font:900 34px/1 var(--display);min-width:3.2ch;color:var(--hot)}
+#lmap{height:660px;border:1px solid var(--border);background:var(--panel);border-radius:2px}
+@media (max-width:600px){#lmap{height:520px}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:var(--panel)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:12px 14px;font:400 12.5px/1.45 var(--mono);min-width:220px}
+.leaflet-container a.leaflet-popup-close-button{color:var(--muted)}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--card);color:var(--fg);border-bottom-color:var(--border)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--fg)}
+.pop b.t{font:600 17px/1.2 var(--display);display:block;margin-bottom:2px}
+.pop .c{color:var(--muted);margin-bottom:6px}
+.pop q{display:block;font:italic 400 13px/1.45 var(--body);margin:6px 0;quotes:none}
+.pop .note{font-size:11.5px;color:var(--muted);margin:4px 0}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+table.t{width:100%;border-collapse:collapse;font:400 13px/1.35 var(--mono)}
+table.t th{text-align:left;font-weight:500;color:var(--muted);border-bottom:2px solid var(--fg);padding:6px 8px 6px 0}
+table.t td{border-bottom:1px solid var(--rule);padding:7px 8px 7px 0;vertical-align:top}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap}
+table.t td small{color:var(--muted);display:block}
+table.t .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.tablewrap{overflow-x:auto}
+@media (max-width:600px){table.t .wide{display:none}}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--hot);padding:12px 14px;font:400 13px/1.5 var(--mono)}
+.card b{font:600 19px/1.2 var(--display);display:block;margin-bottom:2px}
+.card .big{font:900 26px/1.05 var(--display);margin:8px 0 2px}
+.card .big span{color:var(--muted);font:400 12px/1.35 var(--mono);display:block;margin-top:3px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>History × data</span><span>England and Wales, 1087 to 2021</span></div>
+<header class="hero">
+  <h1>Great <em>fires</em></h1>
+  <svg class="mark" viewBox="0 0 200 140" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">Before 1900, town after town in England burned: London in 1666, Northampton in 1675, Warwick in 1694, Blandford in 1731, and many more. Several rose again in brick and stone as handsome Georgian towns. Did the towns that burned rebuild bigger? I read every fire in Wikipedia's town articles to find out.</p>
+</header>
+<div class="byline">Dr Tristan Hotham, Independent researcher · October 2026 · Data: Wikipedia, OS Open Names, ONS Census 2021 and income estimates, Hull Domesday Project, Wikidata</div>
+
+<div class="stats">
+  <div><b class="h">{{record.great_fires|int}}</b><span>great town fires recorded, {{record.first_year|raw}} to {{record.last_year|raw}}</span></div>
+  <div><b class="h">{{record.share_1600s_1700s|pct}}</b><span>of them in the 1600s and 1700s</span></div>
+  <div><b>{{matched.burned_bigger|int}} of {{matched.pairs|int}}</b><span>burned towns are bigger today than a similar town that did not burn</span></div>
+  <div><b>{{models.size_dom.pct|pc}}</b><span>bigger in 2021, other things equal, but the range runs from {{models.size_dom.lo|pc}} to {{models.size_dom.hi|pc}}</span></div>
+</div>
+
+<p class="lede">On 2 September 1666 a fire broke out in a baker's shop on Pudding Lane. By the time it was out, the City of London had lost some {{highlights.london.houses|int}} houses, {{highlights.london_churches|raw}} parish churches and St Paul's Cathedral. The Rebuilding of London Act banned timber from the outside of new buildings, and London rose again in brick and stone.</p>
+<p>London was not alone. Fire was the great urban disaster of early modern England. Timber houses with thatched roofs stood shoulder to shoulder along narrow streets, with bakers' ovens, maltings, smithies and tallow cauldrons among them. A dry summer and a strong wind could take a whole town in an afternoon. Northampton lost about {{highlights.northampton.houses|int}} homes in 1675. At Wem in Shropshire in 1677 a girl named Jane Churm dropped a candle and {{highlights.wem.houses|int}} dwelling houses burned. At Blandford Forum in 1731 almost every building in the town was destroyed; an Act of Parliament followed, and the town was rebuilt in brick.</p>
+<p>Visitors to Warwick, Blandford, Northampton or Wareham are told that their handsome Georgian streets are the fire's legacy. So I asked a blunter question: in the long run, did the towns that burned do better? Are they bigger, or richer, today than similar towns that never had a great fire?</p>
+
+<h2><span class="n">01 · The record</span>A map of fires remembered</h2>
+<p>There is no open and complete gazetteer of English town fires, so I built a record from what Wikipedia remembers. I took the {{source.town_articles|int}} articles linked from Wikipedia's lists of towns in England and Wales and of UK cities, pulled out every sentence that mentions fire, burning or a blaze ({{source.fire_sentences|int}} sentences in {{source.articles_with_fire_sentence|int}} articles), and read the {{source.dated_sentences_reviewed|int}} that carry a year before 1900. I added Wikipedia's List of urban fires and its articles on particular great fires.</p>
+<p>A fire counts as a <b>great fire</b> if the text gives a year from 1000 to 1899 and describes damage to the town as a whole, not one building: much or most of the town, a third or more, the "Great Fire of" the town, or 20 or more houses. Burnings in war, raids and riots are kept apart and not counted. That leaves <b>{{record.great_fires|int}} great fires</b> in {{record.towns_burned_all|int}} towns, {{record.great_fires_ew|int}} of them in England and Wales. Another {{record.possible|int}} fires are "possible": dated town fires whose scale the text does not make clear.</p>
+<div class="figure bleed">
+  <div class="controls">
+    <button class="btn" id="play" aria-pressed="false">▶ Play</button>
+    <div class="slider"><span class="yearbig" id="yr">1899</span><input type="range" id="year" min="1080" max="1900" step="5" value="1900" aria-label="Show fires up to this year"></div>
+    <button class="btn" id="tPoss" aria-pressed="false">Possible fires</button>
+    <button class="btn" id="tWar" aria-pressed="false">Burnings in war</button>
+    <button class="btn" id="tTowns" aria-pressed="false">Towns with no fire</button>
+  </div>
+  <div id="lmap" role="region" aria-label="Map of great town fires in Britain, 1087 to 1896, sized by houses lost and coloured by century"></div>
+  <div class="legend" id="legend"></div>
+  <div class="src">Circles are sized by the houses (or homes, dwellings, buildings) the source says were lost, where it says; a small circle means no number is given. Fires in the same town are stacked on one point. Points are the town's Wikipedia coordinate or its OS Open Names point; Lisburn (1707) has no point in my data and is not mapped. Tap a circle for the source sentence. Click the map to let the scroll wheel zoom it.</div>
+</div>
+
+<div class="figure">
+  <div class="fig-h">Great fires by century</div>
+  <div class="fig-sub">Counted great fires, all of Britain and Northern Ireland in the record. Scotland and Northern Ireland are few because the town lists I used cover England and Wales.</div>
+  <div class="chart" id="cent"></div>
+</div>
+<p>The record peaks in the {{record.peak_century|raw}} century, with {{record.fires_1600s|int}} great fires, and the 1700s are close behind with {{record.fires_1700s|int}}. Together the two centuries hold {{record.share_1600s_1700s|pct}} of all the fires in the record. The busiest quarter century is {{record.peak_quarter|raw}}, with {{record.peak_quarter_fires|int}}. Then the fires fade: only {{record.fires_1800s|int}} in the 1800s.</p>
+<div class="figure">
+  <div class="fig-h">Great fires by quarter century, 1500 to 1899</div>
+  <div class="fig-sub">Counted great fires in each 25 years.</div>
+  <div class="chart" id="quarter"></div>
+</div>
+<p>Part of that shape is real. Towns were growing in the 1600s while still built of timber and thatch, and the fading after 1800 matches what we know: brick, tile and slate replaced thatch, building acts forbade timber fronts after the big fires, and towns bought fire engines and insurance. Part of it is memory. Medieval fires are thinly recorded, and a Wikipedia editor is more likely to mention a fire that left a famous rebuilt High Street than one that left nothing to see. So read the shape as the fires that towns remember, not a count of every fire that happened.</p>
+
+<h3>The worst recorded losses</h3>
+<div class="figure">
+  <div class="fig-sub">Fires where the source gives a number of houses, homes, dwellings or buildings lost ({{record.with_houses|int}} of {{record.great_fires|int}}). Units vary with the source.</div>
+  <div class="chart" id="houses"></div>
+  <div class="src">London, 1666: {{record.london_1666_houses|int}} houses (13,200 to 13,500 in the Great Fire of London article), drawn off the scale. Sources differ for several fires; the file keeps the alternatives (for example Warwick: 460 buildings in the town article, 157 houses in the Book of Estimates).</div>
+</div>
+<p>Away from London, the typical fire with a number lost {{record.houses_median_ex_london|int}} houses. Several towns burned more than once: {{record.towns_burned_twice_plus|int}} towns have two or more great fires in the record and {{record.towns_burned_three_plus|int}} have three or more. Tiverton burned in {{highlights.tiverton_years|raw}}; Marlborough in {{highlights.marlborough_years|raw}}.</p>
+
+<h2><span class="n">02 · Where</span>A southern and eastern disaster</h2>
+<div class="figure">
+  <div class="fig-h">Share of towns with a recorded great fire, by region</div>
+  <div class="fig-sub">Towns in the panel (articles in the town lists that I could place in England or Wales). The number of burned towns is shown.</div>
+  <div class="chart" id="regions"></div>
+</div>
+<p>The fires cluster in the old market towns of the South, the Midlands and East Anglia. In the {{regions.0.region|raw}} region {{regions.0.burned|int}} of {{regions.0.towns|int}} towns ({{regions.0.share|pct}}) have a great fire in the record. In the three northern regions it is {{record.burned_north|int}} of {{record.n_north|int}} ({{record.share_burned_north|pct1}}), against {{record.share_burned_south_mid|pct1}} in the South and the Midlands (Fisher's exact test p {{record.north_south_fisher_p|p}}). Wales has only {{record.burned_wales|int}} of {{record.towns_wales|int}}.</p>
+<p>That fits the history as I understand it. Before the industrial age most of England's towns of any size were in the South, the Midlands and East Anglia, and many northern towns on today's map grew up with the mills, after the age of the great fires had passed. The panel hints at this too: {{record.dom_share_south_mid|pct}} of the towns of the South and the Midlands lie within {{panel.dom_radius_km|f1}} km of a place in Domesday Book, against {{record.dom_share_north|pct}} of the northern towns (Domesday did not cover the far north, which explains part of that gap). Building stone may matter too: towns on the limestone belt and in the stone country of the North and West burned less easily than timber and thatch. I have not tested that here.</p>
+
+<h2><span class="n">03 · The test</span>Did the burned towns grow bigger?</h2>
+<p>Here is the main question. To compare like with like I need towns that are similar except for the fire. I used {{cmp.n|int}} towns in England and Wales outside Greater London with a Census 2021 built-up area: {{cmp.n_burned|int}} with a great fire and {{cmp.n_unburned|int}} without.</p>
+<p>The raw comparison flatters the burned towns. Their median 2021 population is {{cmp.pop_median_burned|int}}, against {{cmp.pop_median_unburned|int}}. But they were already different before any fire: {{cmp.dom_any_burned|pct}} of them have Domesday settlements of 1086 within {{panel.dom_radius_km|f1}} km, against {{cmp.dom_any_unburned|pct}} of the others, many of which are Victorian or modern towns. The burned towns were old, established places, the kind of towns that had enough houses to burn.</p>
+<div class="figure">
+  <div class="fig-h">Domesday households and 2021 population</div>
+  <div class="fig-sub">Each dot is a town. Horizontal: households recorded in Domesday Book (1086) within {{panel.dom_radius_km|f1}} km of the town point, plus one. Vertical: residents of its 2021 built-up area. Log scales. Ember dots: a great fire in the record.</div>
+  <div class="chart" id="scatter"></div>
+</div>
+<p>So I compared each burned town with towns of the same region and a similar Domesday footprint. In a regression that allows for region and Domesday households, burned towns are about {{models.size_dom.pct|pcabs}} bigger in 2021, but the 95% interval runs from {{models.size_dom.lo|pc}} to {{models.size_dom.hi|pc}}, so no difference at all is well within the range (p = {{models.size_dom.p|f2}}).</p>
+<p>Matching gives the same answer. I paired each burned town with the unburned town in the same region whose Domesday households were closest. {{matched.burned_bigger|int}} of the {{matched.pairs|int}} burned towns are bigger than their match, about what a coin would give (sign test p = {{matched.sign_p|f2}}). The median burned town is {{matched.median_ratio|f2}} times the size of its match, but the spread is wide.</p>
+<div class="figure">
+  <div class="fig-h">Burned towns against their matches</div>
+  <div class="fig-sub">Each dot is one burned town: its 2021 population divided by that of the unburned town in the same region with the closest Domesday households. Right of the line: the burned town is bigger. Log scale.</div>
+  <div class="chart" id="pairs"></div>
+</div>
+<p>And there is a catch that pushes the other way. The burned towns have longer Wikipedia articles: a median of {{cmp.chars_median_burned|int}} characters against {{cmp.chars_median_unburned|int}}, {{cmp.chars_ratio|f2}} times as long. Bigger and better known towns get longer articles, and longer articles are more likely to mention a fire. Once I also allow for article length the burned towns' edge disappears ({{models.size_dom_chars.pct|pc}}, 95% interval {{models.size_dom_chars.lo|pc}} to {{models.size_dom_chars.hi|pc}}). Among the {{market.n|int}} towns whose articles call them market towns, the most like-for-like group, the difference is {{market.size.pct|pc}} (95% interval {{market.size.lo|pc}} to {{market.size.hi|pc}}).</p>
+<div class="figure">
+  <div class="fig-h">How much bigger, or richer, are the burned towns?</div>
+  <div class="fig-sub">Estimated difference between burned and unburned towns, per cent, with 95% intervals. Each row is one model.</div>
+  <div class="chart" id="models"></div>
+  <div class="src">Least squares on logs with robust standard errors. Region: fixed effects for the ten regions in the panel (London left out). Domesday: log of one plus Domesday households within {{panel.dom_radius_km|f1}} km. Income models allow for 2021 population and region.</div>
+</div>
+<p class="pull">The fires made some of England's loveliest streets. They did not, on this evidence, make the towns that burned any bigger in the long run.</p>
+
+<h2><span class="n">04 · Today</span>Richer?</h2>
+<p>Household income tells the same story. The ONS estimates for the financial year ending 2023 give the burned towns a median mean household income of {{cmp.inc_median_burned|gbp}}, against {{cmp.inc_median_unburned|gbp}} for the others: partly a southern premium, because the fires were southern. Allowing for region and size, the difference is {{models.income_size.pct|pc}} (95% interval {{models.income_size.lo|pc}} to {{models.income_size.hi|pc}}). In the matched pairs the burned town has the higher income in {{matched.inc_burned_higher|int}} of {{matched.inc_pairs|int}} cases, a median gap of {{matched.inc_median_pct|pc}}. If anything, the burned towns are a touch poorer than their neighbours of similar size, but the gap is small and not robust across methods.</p>
+
+<h2><span class="n">05 · The old giants</span>The biggest towns of 1377 and 1801</h2>
+<p>The Wikipedia article on England's historical town populations ranks the largest towns in the poll tax of 1377 and in the census of 1801. {{c1377.n_burned|int}} of the {{c1377.n|int}} towns of 1377 had a great fire between 1377 and 1800 in my record: {{c1377.burned_towns.0|raw}}, {{c1377.burned_towns.1|raw}}, {{c1377.burned_towns.2|raw}}, {{c1377.burned_towns.3|raw}} and {{c1377.burned_towns.4|raw}}. From 1377 to 2021 they grew a median {{c1377.median_growth_burned|f1}} times, against {{c1377.median_growth_unburned|f1}} times for the rest (Mann Whitney p = {{c1377.mw_p_growth|f2}}). Of the {{c1801.n|int}} largest towns of 1801 still traceable today, {{c1801.n_burned|int}} had burned before 1801; they grew a median {{c1801.median_growth_burned|f1}} times to 2021, the others {{c1801.median_growth_unburned|f1}} times. Groups this small cannot settle anything, and both tables only list the largest towns, so the small market towns where most fires happened are not in them.</p>
+<div class="figure">
+  <div class="fig-h">The 1377 top table, then and now</div>
+  <div class="fig-sub">Rank by poll tax population in 1377 and rank by 2021 built-up area population among the same towns. Ember: a great fire between 1377 and 1800.</div>
+  <div class="tablewrap"><table class="t" id="t1377"></table></div>
+</div>
+
+<h2><span class="n">06 · The look</span>Rebuilt in brick</h2>
+<p>Where the fires did leave a mark is on the streets. In {{record.towns_rebuild_sentence|int}} burned towns, the fire sentences themselves tie the town's buildings to the rebuilding, and {{record.towns_georgian_sentence|int}} call the result Georgian. I also counted Grade I and Grade II* listed buildings with a date in Wikidata within {{panel.lb_radius_km|f1}} km of each town point. Of the {{listed.towns|int}} towns with at least three dated buildings, the {{listed.burned|int}} that burned between 1600 and 1799 have {{listed.geo_share_burned|pct}} of their dated top buildings from 1700 to 1837, against {{listed.geo_share_unburned|pct}} in towns with no recorded fire (Mann Whitney p = {{listed.geo_mw_p|f2}}). The direction fits the Georgian rebuilding, but only {{listed.share_dated_near_towns|pct}} of the top listed buildings near these towns have a date in Wikidata, and {{listed.burned|int}} towns are too few to be sure.</p>
+
+<h2><span class="n">07 · What this cannot show</span>Memory, matching and causes</h2>
+<p><b>A record of memory, not a gazetteer.</b> This is a record of fires remembered in Wikipedia articles, not a complete list of the fires that happened. Many towns had great fires that their articles do not mention, and an article's length and care vary. Burned towns have longer articles, so the record leans towards better documented towns. I counted a fire only where the text gives a year and town-wide damage; the {{record.possible|int}} possible fires and {{record.war|int}} war burnings are in the data file with the sentence that records them. Counting the possible fires as great fires changes the size estimate to {{models.size_dom_incl_possible.pct|pc}} (95% interval {{models.size_dom_incl_possible.lo|pc}} to {{models.size_dom_incl_possible.hi|pc}}).</p>
+<p><b>Reading, not keyword matching.</b> I read every dated sentence and classified it by the rule above, with a review note on every fire. {{record.year_not_in_quote|int}} great fires have no year in the quoted sentence: I took Chudleigh (1807) and Ilfracombe (1896) from their full articles, Leatherhead (1392) from "one year after", and Edinburgh (1824) from the article on its Great Fire.</p>
+<p><b>Size before the fire.</b> Only Domesday Book gives a size for almost every old town, and 1086 is a long way before 1675. Small towns are missing from the 1377 and 1801 tables. A town's 2021 built-up area is a different shape from the town that burned.</p>
+<p><b>No causes.</b> These are associations. A fire could help a town (new streets, new money) or hurt it (debt, people who never came back); the data can only say that, on average, burned towns ended up neither clearly bigger nor clearly richer than towns like them.</p>
+
+<div class="note" id="method">
+  <h3>How I did this</h3>
+  <p><b>Fires.</b> Wikipedia town articles (the lists of towns in England and in Wales and the list of UK cities), retrieved 27 October 2026: every sentence mentioning fire, fires, burnt, burned, conflagration or blaze. I read the {{source.dated_sentences_reviewed|int}} sentences with a year from 1000 to 1899 plus a few undated ones, and classified each fire as great, possible, war, a single building or modern. I added "List of urban fires", "Early fires of London" and the articles on the fires of Norwich (1507), Tiverton (1731), London, Northampton, Warwick, Edinburgh, Newcastle and Gateshead, and Whitstable. One row per town and fire; a fire that struck two towns counts for each.</p>
+  <p><b>Towns.</b> {{panel.towns|int}} articles in the town lists that I could place in England or Wales, at their Wikipedia coordinate or OS Open Names point, matched by name to a Census 2021 built-up area (BUA22), else to the nearest built-up area within 2 km. 2021 residents are summed from LSOAs; income is the population-weighted mean of the ONS MSOA estimates of mean total household income (FYE2023) over the MSOAs that best fit the area, or the nearest MSOA for small towns. Domesday: households of all Domesday places within {{panel.dom_radius_km|f1}} km (Hull Domesday Project). 1377 and 1801: Wikipedia's List of towns and cities in England by historical population.</p>
+  <p><b>Tests.</b> Least squares on log 2021 population and log income with region fixed effects and robust errors; nearest-neighbour matching on Domesday households within region; Mann Whitney and sign tests. Greater London is left out of the comparisons.</p>
+</div>
+<div class="cta">
+  <a class="p" href="https://github.com/Tristan-Hotham/great-fires">Data and code</a>
+  <a href="https://doi.org/10.5281/zenodo.23691902">Read the paper</a>
+  <a href="https://blog.tristanhotham.com/2026/10/27/great-fires/">Blog post</a>
+  <a href="https://tristan-hotham.github.io/domesday-destiny/">Is Domesday destiny?</a>
+  <a href="https://tristan-hotham.github.io/canal-mania/">Canal mania</a>
+  <a href="https://blog.tristanhotham.com/">More history data</a>
+</div>
+<footer>
+  <p>Dr Tristan Hotham, Independent researcher. ORCID 0000-0003-4931-9349. Cite as: Hotham, T. (2026) Great Fires: Did the Towns That Burned Rebuild Bigger? Zenodo. https://doi.org/10.5281/zenodo.23691902</p>
+  <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+  <p>Fire sentences, town lists and historical population tables: Wikipedia, CC BY-SA 4.0. Listed buildings: Wikidata, CC0. Census 2021 and income estimates: Office for National Statistics, licensed under the Open Government Licence v3.0. OS Open Names and ONS geography: contains OS data © Crown copyright and database right 2026. Domesday: Hull Domesday Project (Professor J.J.N. Palmer, George Slater and the University of Hull), CC BY-NC-SA. Tiles © Esri.</p>
+  <p>Data and page text: CC BY-SA 4.0, except the Domesday file (CC BY-NC-SA 4.0). Code: MIT licence.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const D = /*SITE*/;
+const R = /*RESULTS*/;
+const NS = "http://www.w3.org/2000/svg";
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) if (a[k] != null) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const fmt = n => n == null ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const gbp = n => "£" + fmt(n);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+function hover(node, h) { node.style.cursor = "pointer"; node.setAttribute("tabindex", "0"); const s = () => { const r = node.getBoundingClientRect(); showTip(h, r.left + r.width / 2, r.top); }; node.addEventListener("pointerenter", s); node.addEventListener("pointerleave", hideTip); node.addEventListener("focus", s); node.addEventListener("blur", hideTip); node.addEventListener("click", e => { s(); e.stopPropagation(); }); }
+document.addEventListener("click", hideTip);
+const redraws = [];
+function resp(box, render) { let last = 0; const go = (force) => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; redraws.forEach(f => f()); };
+const CEN = [["--c0", "Before 1500", y => y < 1500], ["--c16", "1500s", y => y < 1600], ["--c17", "1600s", y => y < 1700], ["--c18", "1700s", y => y < 1800], ["--c19", "1800s", y => true]];
+const cen = y => CEN.findIndex(c => c[2](y));
+
+/* hero mark: a row of gabled houses with flames */
+(() => { const g = document.getElementById("heroMark");
+  [[10, 70, 44], [56, 58, 40], [98, 74, 42], [142, 62, 48]].forEach(([x, top, w], i) => {
+    el("path", { d: `M${x} 130 L${x} ${top + 18} L${x + w / 2} ${top} L${x + w} ${top + 18} L${x + w} 130 Z`, fill: "var(--fg)" }, g);
+    el("rect", { x: x + w / 2 - 5, y: 112, width: 10, height: 18, fill: "var(--bg)" }, g); });
+  const fl = (x, y, s, c) => el("path", { d: `M${x} ${y} c${-9 * s} ${-12 * s} ${-2 * s} ${-22 * s} ${2 * s} ${-34 * s} c${2 * s} ${10 * s} ${12 * s} ${14 * s} ${8 * s} ${26 * s} c${4 * s} ${-4 * s} ${4 * s} ${-9 * s} ${3 * s} ${-13 * s} c${8 * s} ${8 * s} ${8 * s} ${18 * s} ${-1 * s} ${21 * s} Z`, fill: c }, g);
+  fl(76, 60, 1.25, "var(--c17)"); fl(78, 58, 0.75, "var(--c16)"); fl(164, 64, 1.05, "var(--c18)"); fl(165, 62, 0.6, "var(--c16)"); fl(32, 72, 0.8, "var(--c17)");
+})();
+
+/* ===== map ===== */
+let lmap, tiles, fireMk = [], townMk = [], year = 1900, timer = null, showPoss = false, showWar = false, showTowns = false;
+function tileUrl() { return `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${isDark() ? "Dark" : "Light"}_Gray_Base/MapServer/tile/{z}/{y}/{x}`; }
+function frad(f, z) { const k = Math.pow(1.3, Math.min(z, 11) - 6); const base = f.h ? Math.max(5, Math.min(46, Math.sqrt(f.h) * 0.85)) : 4.5; return base * k; }
+function fstyle(m) { const f = m.f, z = lmap.getZoom(); const vis = f.y <= year && (f.c === "g" || (f.c === "p" && showPoss) || (f.c === "w" && showWar));
+  if (!vis) return { radius: 0, opacity: 0, fillOpacity: 0 };
+  const col = f.c === "w" ? css("--war") : css(CEN[cen(f.y)][0]); const fresh = f.y > year - 15 && year < 1900;
+  if (f.c === "g") return { radius: frad(f, z), fillColor: col, fillOpacity: fresh ? 0.95 : 0.72, color: fresh ? css("--fg") : css("--bg"), weight: fresh ? 2 : 1, opacity: 1 };
+  return { radius: frad(f, z), fillColor: col, fillOpacity: 0.08, color: col, weight: 1.6, opacity: 0.95, dashArray: f.c === "w" ? "3 3" : null }; }
+function tstyle() { return showTowns ? { radius: 2.4, fillColor: css("--cold"), fillOpacity: 0.55, color: css("--cold"), weight: 0, opacity: 0 } : { radius: 0, fillOpacity: 0, opacity: 0 }; }
+const CLS = { g: "Great fire", p: "Possible fire (scale not clear)", w: "Burning in war or raid (not counted)" };
+function fpop(f) { return `<div class="pop"><b class="t">${esc(f.t)}, ${f.y}</b><div class="c">${CLS[f.c]}${f.h ? " · " + fmt(f.h) + " " + esc(f.u) : ""}</div><q>${esc(f.s)}</q><div class="note">Source: Wikipedia, ${esc(f.a)}</div>${f.n ? `<div class="note">Note: ${esc(f.n)}</div>` : ""}</div>`; }
+function legend() { document.getElementById("legend").innerHTML = CEN.map(c => `<span><i style="background:var(${c[0]})"></i>${c[1]}</span>`).join("") + `<span><i style="border:1.6px solid var(--hot);background:transparent"></i>Possible</span><span><i style="border:1.6px dashed var(--war);background:transparent"></i>War burning</span><span><i style="background:var(--cold);width:6px;height:6px"></i>Town with no recorded fire</span>`; }
+function restyle() { fireMk.forEach(m => m.setStyle(fstyle(m))); townMk.forEach(m => m.setStyle(tstyle())); document.getElementById("yr").textContent = Math.min(year, 1899); }
+(() => {
+  if (!window.L) { document.getElementById("lmap").innerHTML = '<p style="padding:16px">The map library did not load.</p>'; return; }
+  lmap = L.map("lmap", { preferCanvas: true, zoomSnap: 0.5, minZoom: 5, maxZoom: 14, scrollWheelZoom: false });
+  lmap.fitBounds([[50.1, -5.4], [55.0, 1.8]], { padding: innerWidth < 600 ? [0, 0] : [10, 10] });
+  tiles = L.tileLayer(tileUrl(), { attribution: "Tiles &copy; Esri", maxZoom: 16 }).addTo(lmap);
+  const rend = L.canvas({ padding: 0.5, tolerance: 4 });
+  D.towns.filter(t => !t.b).forEach(t => { const m = L.circleMarker([t.la, t.lo], { renderer: rend, interactive: false }); m.setStyle(tstyle()); m.addTo(lmap); townMk.push(m); });
+  [...D.fires].sort((a, b) => (b.h || 0) - (a.h || 0)).forEach(f => { const m = L.circleMarker([f.la, f.lo], { renderer: rend }); m.f = f; m.setStyle(fstyle(m)); m.bindPopup(() => fpop(f), { maxWidth: 320 }); m.addTo(lmap); fireMk.push(m); });
+  lmap.on("zoomend", restyle);
+  lmap.on("click focus", () => lmap.scrollWheelZoom.enable());
+  lmap.getContainer().addEventListener("mouseleave", () => lmap.scrollWheelZoom.disable());
+  legend(); restyle();
+  const sl = document.getElementById("year"), pb = document.getElementById("play");
+  sl.oninput = () => { year = +sl.value; restyle(); };
+  const stop = () => { clearInterval(timer); timer = null; pb.textContent = "▶ Play"; pb.setAttribute("aria-pressed", "false"); };
+  pb.onclick = () => { if (timer) { stop(); return; } if (+sl.value >= 1900) sl.value = 1480; year = +sl.value; restyle(); pb.textContent = "❚❚ Pause"; pb.setAttribute("aria-pressed", "true");
+    timer = setInterval(() => { if (year >= 1900) { stop(); return; } year += 5; sl.value = year; restyle(); }, 180); };
+  const tog = (id, f) => { const b = document.getElementById(id); b.onclick = () => { const v = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", v); f(v); restyle(); }; };
+  tog("tPoss", v => showPoss = v); tog("tWar", v => showWar = v); tog("tTowns", v => showTowns = v);
+  redraws.push(() => { tiles.setUrl(tileUrl()); restyle(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => redraws.forEach(f => f()));
+})();
+
+/* ===== centuries ===== */
+resp(document.getElementById("cent"), (W, nar) => {
+  const rows = R.by_century, H = nar ? 230 : 270, m = { l: 34, r: 8, t: 22, b: 30 }, bw = (W - m.l - m.r) / rows.length, max = 35;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Bar chart of great fires by century, peaking in the 1600s and 1700s" }, document.getElementById("cent"));
+  const Y = v => H - m.b - v / max * (H - m.t - m.b);
+  [0, 10, 20, 30].forEach(t => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: "var(--rule)" }, svg); lbl(svg, m.l - 6, Y(t) + 4, t, "lab m s", "end"); });
+  rows.forEach((r, i) => { const x = m.l + i * bw + 3, c = r.century < 16 ? "--c0" : `--c${r.century}`;
+    const b = el("rect", { x, y: Y(r.fires), width: bw - 6, height: H - m.b - Y(r.fires), rx: 2, fill: `var(${c})` }, svg);
+    if (r.fires > r.fires_ew) el("rect", { x, y: Y(r.fires), width: bw - 6, height: Y(r.fires_ew) - Y(r.fires), fill: "var(--cold)", opacity: 0.85 }, svg);
+    hover(b, `<b>${r.label} century</b><br>${r.fires} great fires (${r.fires_ew} in England and Wales)`);
+    lbl(svg, x + (bw - 6) / 2, Y(r.fires) - 5, r.fires, "lab s b", "middle");
+    lbl(svg, x + (bw - 6) / 2, H - m.b + 15, nar ? r.label.replace("th", "") : r.label, "lab m s", "middle"); });
+  lbl(svg, W - m.r, m.t - 8, "grey cap: Scotland and N. Ireland", "lab m s", "end");
+});
+
+/* ===== quarters ===== */
+resp(document.getElementById("quarter"), (W, nar) => {
+  const rows = R.by_quarter, H = nar ? 210 : 240, m = { l: 34, r: 8, t: 14, b: 30 }, bw = (W - m.l - m.r) / rows.length, max = 15;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Bar chart of great fires per quarter century 1500 to 1899" }, document.getElementById("quarter"));
+  const Y = v => H - m.b - v / max * (H - m.t - m.b);
+  [0, 5, 10, 15].forEach(t => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: "var(--rule)" }, svg); lbl(svg, m.l - 6, Y(t) + 4, t, "lab m s", "end"); });
+  rows.forEach((r, i) => { const x = m.l + i * bw + 2, c = `--c${Math.floor(r.start / 100) + 1}`;
+    const b = el("rect", { x, y: Y(r.fires), width: bw - 4, height: H - m.b - Y(r.fires), rx: 2, fill: `var(${c})` }, svg);
+    hover(b, `<b>${r.start} to ${r.start + 24}</b><br>${r.fires} great fires`);
+    if (r.start % 100 === 0) lbl(svg, x, H - m.b + 15, r.start, "lab m s", "start"); });
+});
+
+/* ===== houses ===== */
+resp(document.getElementById("houses"), (W, nar) => {
+  const rows = R.houses.filter(r => r.town !== "London"), lon = R.houses.find(r => r.town === "London"), rowH = 21, m = { l: nar ? 128 : 160, r: nar ? 96 : 150, t: 8, b: 24 };
+  const all = [lon, ...rows], H = all.length * rowH + m.t + m.b, max = 800, X = v => m.l + Math.min(v, max) / max * (W - m.l - m.r);
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Houses lost in each fire where the source gives a number" }, document.getElementById("houses"));
+  [0, 200, 400, 600, 800].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: "var(--rule)" }, svg); lbl(svg, X(t), H - m.b + 15, fmt(t), "lab m s", "middle"); });
+  all.forEach((r, i) => { const y = m.t + i * rowH, c = `var(${CEN[cen(r.year)][0]})`;
+    lbl(svg, m.l - 8, y + 14, `${r.town} ${r.year}`, "lab s", "end");
+    const b = el("rect", { x: m.l, y: y + 4, width: Math.max(1, X(r.houses) - m.l), height: rowH - 8, rx: 2, fill: c }, svg);
+    hover(b, `<b>${esc(r.town)}, ${r.year}</b><br>${fmt(r.houses)} ${esc(r.unit)}`);
+    if (r.houses > max) { el("path", { d: `M${X(max) - 10} ${y + 2} l6 ${rowH - 4} M${X(max) - 4} ${y + 2} l6 ${rowH - 4}`, stroke: "var(--bg)", "stroke-width": 3 }, svg); }
+    lbl(svg, X(r.houses) + 5, y + 14, `${fmt(r.houses)} ${nar ? "" : r.unit}`, "lab s"); });
+});
+
+/* ===== regions ===== */
+resp(document.getElementById("regions"), (W, nar) => {
+  const rows = R.regions, rowH = 26, m = { l: nar ? 112 : 180, r: 74, t: 6, b: 26 }, H = rows.length * rowH + m.t + m.b, max = 0.18, X = v => m.l + v / max * (W - m.l - m.r);
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Share of towns with a recorded great fire, by region" }, document.getElementById("regions"));
+  [0, 0.05, 0.1, 0.15].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: "var(--rule)" }, svg); lbl(svg, X(t), H - m.b + 15, Math.round(t * 100) + "%", "lab m s", "middle"); });
+  rows.forEach((r, i) => { const y = m.t + i * rowH;
+    lbl(svg, m.l - 8, y + 16, nar ? r.region.replace("Yorkshire and the Humber", "Yorkshire").replace("East Midlands", "E. Midlands").replace("West Midlands", "W. Midlands") : r.region, nar ? "lab s" : "lab", "end");
+    const b = el("rect", { x: m.l, y: y + 5, width: Math.max(1, X(r.share) - m.l), height: rowH - 10, rx: 2, fill: "var(--hot)" }, svg);
+    hover(b, `<b>${esc(r.region)}</b><br>${r.burned} of ${r.towns} towns with a recorded great fire<br>${r.fires} great fires`);
+    lbl(svg, X(r.share) + 5, y + 16, `${(r.share * 100).toFixed(1)}% (${r.burned})`, "lab s"); });
+});
+
+/* ===== scatter ===== */
+resp(document.getElementById("scatter"), (W, nar) => {
+  const H = nar ? 380 : 460, m = { l: 52, r: 12, t: 12, b: 40 };
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Scatter of Domesday households against 2021 population, burned towns highlighted" }, document.getElementById("scatter"));
+  const x0 = 0, x1 = Math.log10(4000), y0 = Math.log10(300), y1 = Math.log10(2e6);
+  const X = v => m.l + (Math.log10(v + 1) - x0) / (x1 - x0) * (W - m.l - m.r), Y = v => H - m.b - (Math.log10(v) - y0) / (y1 - y0) * (H - m.t - m.b);
+  [0, 9, 99, 999, 2999].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: "var(--rule)" }, svg); lbl(svg, X(t), H - m.b + 16, fmt(t + 1), "lab m s", "middle"); });
+  [1000, 10000, 100000, 1000000].forEach(t => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: "var(--rule)" }, svg); lbl(svg, m.l - 6, Y(t) + 4, t >= 1e6 ? "1m" : fmt(t / 1000) + "k", "lab m s", "end"); });
+  lbl(svg, (m.l + W - m.r) / 2, H - 4, "Domesday households within 2.5 km, plus one (1086)", "lab m s", "middle");
+  const yl = lbl(svg, 0, 0, "2021 built-up area", "lab m s", "middle"); yl.setAttribute("transform", `translate(12 ${(m.t + H - m.b) / 2}) rotate(-90)`);
+  const pts = D.scatter; const jit = i => ((i * 7919) % 13 - 6) * 0.004;
+  pts.filter(p => !p[3]).forEach((p, i) => el("circle", { cx: X(p[1]) + jit(i) * (W - m.l - m.r), cy: Y(p[2]), r: 2.6, fill: "var(--cold)", opacity: 0.45 }, svg));
+  const show = nar ? ["Northampton", "Wem", "Warwick"] : ["Northampton", "Blandford Forum", "Wem", "Warwick", "Norwich", "Wolverhampton"]; const left = ["Wolverhampton", "Blandford Forum", "Norwich"];
+  pts.filter(p => p[3]).forEach(p => { const d = el("circle", { cx: X(p[1]), cy: Y(p[2]), r: 5, fill: "var(--hot)", stroke: "var(--bg)", "stroke-width": 1.5 }, svg);
+    hover(d, `<b>${esc(p[0])}</b><br>Great fire: ${esc(p[4])}<br>Domesday households nearby: ${fmt(p[1])}<br>2021: ${fmt(p[2])}`);
+    if (show.includes(p[0])) { const lf = left.includes(p[0]); lbl(svg, X(p[1]) + (lf ? -8 : 8), Y(p[2]) + 4, p[0], "lab s b", lf ? "end" : "start"); } });
+});
+
+/* ===== pairs ===== */
+resp(document.getElementById("pairs"), (W, nar) => {
+  const P = D.pairs.map(p => ({ ...p, r: p.pop2021 / p.match_pop2021 })).sort((a, b) => a.r - b.r), H = nar ? 200 : 180, m = { l: 14, r: 14, t: 30, b: 36 };
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Strip chart of population ratios between burned towns and their matches" }, document.getElementById("pairs"));
+  const lo = -2, hi = 2, X = v => m.l + (Math.log10(v) - lo) / (hi - lo) * (W - m.l - m.r);
+  [0.01, 0.1, 1, 10, 100].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t - 6, y2: H - m.b, stroke: t === 1 ? "var(--fg)" : "var(--rule)", "stroke-width": t === 1 ? 1.5 : 1 }, svg); lbl(svg, X(t), H - m.b + 16, t < 1 ? "1/" + Math.round(1 / t) : t + "×", "lab m s", "middle"); });
+  lbl(svg, X(1) - 8, m.t - 12, "match bigger", "lab m s", "end"); lbl(svg, X(1) + 8, m.t - 12, "burned town bigger", "lab s b", "start");
+  const rows = Math.max(3, Math.floor((H - m.t - m.b) / 11)); const used = {};
+  P.forEach(p => { const v = Math.min(Math.max(p.r, 0.0101), 99), cx = X(v), k = Math.round(cx / 9); used[k] = (used[k] || 0) + 1; const cy = m.t + 4 + ((used[k] - 1) % rows) * 11;
+    const d = el("circle", { cx, cy, r: 4.4, fill: p.r > 1 ? "var(--hot)" : "var(--cold)", stroke: "var(--bg)", "stroke-width": 1 }, svg);
+    hover(d, `<b>${esc(p.town)}</b> (${p.first_fire}): ${fmt(p.pop2021)}<br>Match: ${esc(p.match)}: ${fmt(p.match_pop2021)}<br>Domesday households ${fmt(p.dom)} against ${fmt(p.match_dom)}<br>Ratio ${p.r.toFixed(2)}`); });
+  const med = R.matched.median_ratio; el("line", { x1: X(med), x2: X(med), y1: m.t - 4, y2: H - m.b, stroke: "var(--hot)", "stroke-dasharray": "3 3" }, svg);
+});
+
+/* ===== models ===== */
+resp(document.getElementById("models"), (W, nar) => {
+  const M = R.models, rows = [["Size: raw", M.size_raw], ["Size: region", M.size_region], ["Size: region + Domesday", M.size_dom], ["Size: + article length", M.size_dom_chars], ["Size: market towns only", R.market.size], ["Size: possible fires counted", M.size_dom_incl_possible], ["Income: raw", M.income_raw], ["Income: region + size", M.income_size], ["Income: market towns only", R.market.income]];
+  const rowH = nar ? 42 : 30, m = { l: nar ? 10 : 210, r: 16, t: 6, b: 28 }, H = rows.length * rowH + m.t + m.b, lo = -50, hi = 100, X = v => m.l + (Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo) * (W - m.l - m.r);
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Estimated per cent differences with 95% intervals for each model" }, document.getElementById("models"));
+  [-50, 0, 50, 100].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: t === 0 ? "var(--fg)" : "var(--rule)" }, svg); lbl(svg, X(t), H - m.b + 16, (t > 0 ? "+" : "") + t + "%", "lab m s", "middle"); });
+  rows.forEach(([name, r], i) => { const y = m.t + i * rowH + rowH / 2 + (nar ? 8 : 0), c = name.startsWith("Income") ? "var(--gold)" : "var(--hot)";
+    if (nar) lbl(svg, 0, y - 12, name, "lab s b", "start"); else lbl(svg, m.l - 10, y + 4, name, "lab", "end");
+    el("line", { x1: X(r.lo), x2: X(r.hi), y1: y, y2: y, stroke: c, "stroke-width": 3, "stroke-linecap": "round" }, svg);
+    const d = el("circle", { cx: X(r.pct), cy: y, r: 6, fill: c, stroke: "var(--bg)", "stroke-width": 2 }, svg);
+    hover(d, `<b>${name}</b><br>${r.pct > 0 ? "+" : ""}${r.pct.toFixed(1)}% (95% interval ${r.lo.toFixed(1)}% to ${r.hi.toFixed(1)}%)<br>p = ${r.p.toFixed(2)}, ${r.n} towns`); });
+});
+
+/* ===== 1377 table ===== */
+document.getElementById("t1377").innerHTML = `<thead><tr><th>Town</th><th class="num">1377</th><th class="num">Rank</th><th class="num">2021</th><th class="num">Rank</th><th class="wide">Great fires</th></tr></thead><tbody>` +
+  R.c1377_rows.map(r => `<tr><td><span class="dot" style="background:var(${r.burned ? "--hot" : "--cold"})"></span>${esc(r.town)}</td><td class="num">${fmt(r.pop1377)}</td><td class="num">${r.rank1377}</td><td class="num">${fmt(r.pop2021)}</td><td class="num">${r.rank2021}</td><td class="wide">${esc(r.fires)}</td></tr>`).join("") + "</tbody>";
+</script>
+</body>
+</html>
