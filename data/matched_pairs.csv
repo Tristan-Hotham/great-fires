@@ -1,0 +1,72 @@
+town,region,dom,pop2021,inc,match,match_dom,match_pop2021,match_inc,first_fire
+Andover,South East,149.0,46480,61498.0,Brighton and Hove,149.0,274120,57291.0,1141
+Attleborough,Eastern,12.0,10590,49517.0,Great Dunmow,12.0,9032,65341.0,1559
+Basingstoke,South East,88.0,115835,64809.0,Olney,88.0,7214,70722.0,1601
+Bedford,Eastern,41.0,98257,51807.0,Wixams,41.0,5950,73415.0,1802
+Beverley,Yorkshire and the Humber,55.0,30384,53457.0,Wath upon Dearne,54.0,16975,46714.0,1188
+Biggleswade,Eastern,77.0,22540,64947.0,Halesworth,77.0,4926,46990.0,1785
+Blandford Forum,South West,72.0,12941,50575.0,Helston,73.0,10225,50705.0,1731
+Bradninch,South West,71.0,2004,61953.0,Newlyn,71.0,1469,40636.0,1666
+Brandon,Eastern,19.0,9690,42559.0,Bushey,19.0,27028,70963.0,1789
+Buckingham,South East,134.0,14292,70627.0,Polegate,130.0,9338,48309.0,1725
+Builth Wells,Wales,0.0,2471,38894.0,Blaenau Ffestiniog,0.0,2809,43737.0,1690
+Bungay,Eastern,338.0,5010,48976.0,Hertford,294.0,29420,72222.0,1688
+Bury St Edmunds,Eastern,27.0,41704,55592.0,Wivenhoe,27.0,6582,64951.0,1608
+Chard,South West,31.0,14291,41184.0,Gillingham,31.0,11286,50905.0,1577
+Chatteris,Eastern,27.0,11187,49711.0,Wivenhoe,27.0,6582,64951.0,1310
+Chudleigh,South West,12.0,4754,56293.0,Padstow,12.0,2517,45171.0,1807
+Church Stretton,West Midlands,29.0,4592,53094.0,Newcastle-under-Lyme,28.0,76230,46472.0,1593
+Crediton,South West,389.0,8077,49329.0,Taunton,459.0,62323,51571.0,1743
+Crowland,East Midlands,0.0,4855,52206.0,Chapel-en-le-Frith,0.0,7138,47900.0,1469
+Cullompton,South West,51.0,11762,48863.0,Bovey Tracey,52.0,5664,52107.0,1839
+Dereham,Eastern,74.0,20867,46877.0,Southend-on-Sea,74.0,180687,55999.0,1581
+Doncaster,Yorkshire and the Humber,116.0,86524,42828.0,Selby,116.5,19669,43269.0,1204
+Dorchester,South West,280.0,21358,53538.0,Bath,303.0,95048,60974.0,1613
+Fakenham,Eastern,45.0,8014,41521.0,Cambridge,43.0,149510,70865.0,1738
+Fordingbridge,South East,43.0,5237,61048.0,Amersham,43.0,16618,85030.0,1702
+Gateshead,North East,0.0,111374,42217.0,Morpeth,0.0,16009,69431.0,1854
+Gloucester,South West,118.0,117187,49915.0,Bampton,119.0,2167,48397.0,1222
+Havant,South East,71.0,47635,50020.0,Woking,71.0,72747,70719.0,1760
+Haverhill,Eastern,87.0,26431,54225.0,Felixstowe,88.0,24334,49088.0,1667
+Hingham,Eastern,164.5,3083,60873.0,Saffron Walden,164.0,14959,67532.0,1688
+Holt,Eastern,124.0,4014,45094.0,Peterborough,125.0,191905,51180.0,1708
+Honiton,South West,64.0,11663,43541.0,Painswick,64.0,2831,65880.0,1747
+Ilfracombe,South West,62.0,9856,38817.0,Lydney,62.0,9732,47411.0,1896
+Leatherhead,South East,87.0,12086,64672.0,Redhill,87.0,30863,71532.0,1392
+Lichfield,West Midlands,146.0,32582,58038.0,Droitwich Spa,156.0,23721,52591.0,1291
+Market Drayton,West Midlands,2.0,12588,44824.0,Broseley,4.0,5981,52811.0,1651
+Marlborough,South West,43.0,9128,54373.0,Northam,43.0,3634,42468.0,1653
+Minehead,South West,86.0,11755,40110.0,Barnstaple,86.0,29369,46393.0,1791
+Nantwich,North West,6.0,19692,42354.0,Sandbach,7.0,12112,50062.0,1583
+New Alresford,South East,309.0,4696,63047.0,Hythe,272.0,13442,43055.0,1689
+Newcastle upon Tyne,North East,0.0,284471,46870.0,Sunderland,0.0,165394,40788.0,1854
+Newmarket,Eastern,0.0,19507,49739.0,Coggeshall,0.0,3383,64431.0,1683
+Newport,West Midlands,99.0,13139,54563.0,Shipston-on-Stour,100.0,5851,52550.0,1665
+North Walsham,Eastern,64.0,11478,43734.0,Basildon,61.0,116179,53919.0,1600
+Northampton,East Midlands,126.0,239244,52177.0,Rothwell,131.0,8620,51535.0,1675
+Norwich,Eastern,1873.0,198213,49960.0,Thetford,1678.0,25256,48606.0,1507
+Ottery St Mary,South West,96.0,6045,57902.0,Chipping Campden,94.0,1539,57660.0,1866
+Potton,Eastern,57.0,3583,67632.0,Chipping Ongar,56.0,4381,58355.0,1783
+Ramsey,Eastern,0.0,4873,52620.0,Chorleywood,0.0,13994,86782.0,1731
+Retford,East Midlands,26.4,23965,43919.0,Matlock,26.3,11178,54158.0,1528
+Shepshed,East Midlands,76.0,14869,51287.0,Bourne,77.0,17989,53188.0,1753
+Shifnal,West Midlands,69.0,8939,60835.0,Coventry,69.0,340496,48933.0,1591
+Shrewsbury,West Midlands,48.0,75432,52491.0,Stratford-upon-Avon,48.0,27351,58863.0,1394
+Southam,West Midlands,35.0,8109,61615.0,Ledbury,38.0,9439,48668.0,1741
+St Ives,Eastern,63.0,16819,60906.0,Basildon,61.0,116179,53919.0,1689
+Stevenage,Eastern,51.0,92637,60076.0,Rayleigh,51.0,32009,64743.0,1807
+Stony Stratford,South East,66.0,3074,59138.0,Bognor Regis,67.0,67430,46114.0,1736
+Tamworth,West Midlands,14.0,75989,49588.0,Hednesford,14.0,60944,47479.0,1345
+Tiverton,South West,125.0,20717,46788.0,Westbury,122.0,16765,54974.0,1598
+Wareham,South West,18.0,5881,47308.0,Teignmouth,18.0,14934,48744.0,1762
+Warwick,West Midlands,178.0,35943,62482.0,Whitnash,175.0,7335,58381.0,1694
+Watton,Eastern,74.0,12909,42093.0,Southend-on-Sea,74.0,180687,55999.0,1674
+Wellington,South West,171.0,13816,50169.0,Wellington,171.0,13816,50169.0,1731
+Wem,West Midlands,24.0,6282,43745.0,Atherstone,24.0,8936,44811.0,1677
+Willenhall,West Midlands,27.0,49924,43503.0,Bishop's Castle,27.0,1501,,1659
+Wincanton,South West,101.0,6573,50458.0,Old Sarum,102.0,4409,67340.0,1707
+Windsor,South East,96.0,31905,69806.0,Eton,96.0,3173,61718.0,1681
+Wolverhampton,West Midlands,50.0,235339,45291.0,Rugby,51.0,78477,55530.0,1590
+Worcester,West Midlands,36.5,101556,52831.0,Ledbury,38.0,9439,48668.0,1189
+Wymondham,Eastern,380.0,16675,59247.0,Stowmarket,405.0,21146,62064.0,1615
+Yeovil,South West,46.0,50239,51601.0,Plymouth,46.0,265977,49173.0,1499

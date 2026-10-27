@@ -1,0 +1,1421 @@
+{
+ "source": {
+  "town_articles": 1681,
+  "articles_with_fire_sentence": 748,
+  "fire_sentences": 2213,
+  "dated_sentences_reviewed": 457,
+  "sentences_used": 175
+ },
+ "record": {
+  "rows": 157,
+  "great_fires": 102,
+  "possible": 25,
+  "war": 30,
+  "great_fires_ew": 97,
+  "great_fires_england": 95,
+  "great_fires_wales": 2,
+  "great_fires_scotland": 4,
+  "great_fires_ni": 1,
+  "towns_burned_all": 81,
+  "towns_burned_ew": 77,
+  "first_year": 1087,
+  "last_year": 1896,
+  "with_houses": 29,
+  "year_not_in_quote": 4,
+  "fires_1600s_1700s": 64,
+  "share_1600s_1700s": 0.627,
+  "fires_1500_1899": 86,
+  "fires_before_1500": 16,
+  "fires_1600s": 33,
+  "fires_1700s": 31,
+  "fires_1800s": 11,
+  "fires_1500s": 11,
+  "peak_century": "17th",
+  "peak_quarter": "1675 to 1699",
+  "peak_quarter_fires": 14,
+  "peak_decade": 1730,
+  "peak_decade_fires": 7,
+  "houses_median": 145.0,
+  "houses_median_ex_london": 145.0,
+  "houses_sum_ex_london": 6076,
+  "london_1666_houses": 13200,
+  "towns_burned_twice_plus": 14,
+  "towns_burned_three_plus": 5,
+  "top_region": "Eastern",
+  "top_region_share": 0.163,
+  "share_burned_north": 0.018,
+  "share_burned_south_mid": 0.097,
+  "n_north": 275,
+  "burned_north": 5,
+  "north_south_fisher_p": 4.554987314186587e-06,
+  "towns_rebuild_sentence": 14,
+  "towns_georgian_sentence": 8,
+  "dom_share_north": 0.367,
+  "dom_share_south_mid": 0.875,
+  "burned_wales": 2,
+  "towns_wales": 154
+ },
+ "by_century": [
+  {
+   "century": 11,
+   "label": "11th",
+   "fires": 1,
+   "fires_ew": 1
+  },
+  {
+   "century": 12,
+   "label": "12th",
+   "fires": 4,
+   "fires_ew": 4
+  },
+  {
+   "century": 13,
+   "label": "13th",
+   "fires": 4,
+   "fires_ew": 4
+  },
+  {
+   "century": 14,
+   "label": "14th",
+   "fires": 4,
+   "fires_ew": 4
+  },
+  {
+   "century": 15,
+   "label": "15th",
+   "fires": 3,
+   "fires_ew": 3
+  },
+  {
+   "century": 16,
+   "label": "16th",
+   "fires": 11,
+   "fires_ew": 11
+  },
+  {
+   "century": 17,
+   "label": "17th",
+   "fires": 33,
+   "fires_ew": 31
+  },
+  {
+   "century": 18,
+   "label": "18th",
+   "fires": 31,
+   "fires_ew": 29
+  },
+  {
+   "century": 19,
+   "label": "19th",
+   "fires": 11,
+   "fires_ew": 10
+  }
+ ],
+ "by_quarter": [
+  {
+   "start": 1500,
+   "fires": 1
+  },
+  {
+   "start": 1525,
+   "fires": 1
+  },
+  {
+   "start": 1550,
+   "fires": 1
+  },
+  {
+   "start": 1575,
+   "fires": 8
+  },
+  {
+   "start": 1600,
+   "fires": 7
+  },
+  {
+   "start": 1625,
+   "fires": 1
+  },
+  {
+   "start": 1650,
+   "fires": 11
+  },
+  {
+   "start": 1675,
+   "fires": 14
+  },
+  {
+   "start": 1700,
+   "fires": 8
+  },
+  {
+   "start": 1725,
+   "fires": 13
+  },
+  {
+   "start": 1750,
+   "fires": 6
+  },
+  {
+   "start": 1775,
+   "fires": 4
+  },
+  {
+   "start": 1800,
+   "fires": 4
+  },
+  {
+   "start": 1825,
+   "fires": 1
+  },
+  {
+   "start": 1850,
+   "fires": 5
+  },
+  {
+   "start": 1875,
+   "fires": 1
+  }
+ ],
+ "houses": [
+  {
+   "town": "London",
+   "year": 1666,
+   "houses": 13200,
+   "unit": "houses"
+  },
+  {
+   "town": "Norwich",
+   "year": 1507,
+   "houses": 718,
+   "unit": "houses"
+  },
+  {
+   "town": "Tiverton",
+   "year": 1612,
+   "houses": 600,
+   "unit": "houses"
+  },
+  {
+   "town": "Northampton",
+   "year": 1675,
+   "houses": 600,
+   "unit": "homes"
+  },
+  {
+   "town": "Warwick",
+   "year": 1694,
+   "houses": 460,
+   "unit": "buildings"
+  },
+  {
+   "town": "Edinburgh",
+   "year": 1824,
+   "houses": 400,
+   "unit": "homes"
+  },
+  {
+   "town": "Tiverton",
+   "year": 1598,
+   "houses": 400,
+   "unit": "houses"
+  },
+  {
+   "town": "Dorchester",
+   "year": 1613,
+   "houses": 300,
+   "unit": "houses"
+  },
+  {
+   "town": "Wymondham",
+   "year": 1615,
+   "houses": 300,
+   "unit": "properties"
+  },
+  {
+   "town": "Tiverton",
+   "year": 1731,
+   "houses": 298,
+   "unit": "houses"
+  },
+  {
+   "town": "Marlborough",
+   "year": 1653,
+   "houses": 244,
+   "unit": "houses"
+  },
+  {
+   "town": "Chudleigh",
+   "year": 1807,
+   "houses": 180,
+   "unit": "houses"
+  },
+  {
+   "town": "Newport",
+   "year": 1665,
+   "houses": 162,
+   "unit": "families' homes"
+  },
+  {
+   "town": "Bury St Edmunds",
+   "year": 1608,
+   "houses": 160,
+   "unit": "dwellings"
+  },
+  {
+   "town": "Cullompton",
+   "year": 1839,
+   "houses": 145,
+   "unit": "houses and other buildings"
+  },
+  {
+   "town": "Hindon",
+   "year": 1754,
+   "houses": 144,
+   "unit": "houses"
+  },
+  {
+   "town": "Wem",
+   "year": 1677,
+   "houses": 140,
+   "unit": "dwelling houses"
+  },
+  {
+   "town": "Buckingham",
+   "year": 1725,
+   "houses": 138,
+   "unit": "dwellings"
+  },
+  {
+   "town": "London",
+   "year": 1633,
+   "houses": 122,
+   "unit": "buildings"
+  },
+  {
+   "town": "North Walsham",
+   "year": 1600,
+   "houses": 118,
+   "unit": "homes"
+  },
+  {
+   "town": "New Alresford",
+   "year": 1689,
+   "houses": 117,
+   "unit": "houses"
+  },
+  {
+   "town": "Shepshed",
+   "year": 1753,
+   "houses": 85,
+   "unit": "bays of buildings"
+  },
+  {
+   "town": "Bedford",
+   "year": 1802,
+   "houses": 72,
+   "unit": "properties"
+  },
+  {
+   "town": "Whitstable",
+   "year": 1869,
+   "houses": 71,
+   "unit": "buildings"
+  },
+  {
+   "town": "Watton",
+   "year": 1674,
+   "houses": 60,
+   "unit": "houses"
+  },
+  {
+   "town": "Wolverhampton",
+   "year": 1696,
+   "houses": 60,
+   "unit": "homes"
+  },
+  {
+   "town": "Fordingbridge",
+   "year": 1702,
+   "houses": 43,
+   "unit": "dwelling houses"
+  },
+  {
+   "town": "Ilfracombe",
+   "year": 1896,
+   "houses": 35,
+   "unit": "houses and business premises"
+  },
+  {
+   "town": "Fakenham",
+   "year": 1738,
+   "houses": 26,
+   "unit": "buildings"
+  }
+ ],
+ "repeat": [
+  {
+   "town": "London",
+   "fires": 5,
+   "years": "1087 1133 1212 1633 1666"
+  },
+  {
+   "town": "Tiverton",
+   "fires": 3,
+   "years": "1598 1612 1731"
+  },
+  {
+   "town": "New Alresford",
+   "fires": 3,
+   "years": "1689 1710 1736"
+  },
+  {
+   "town": "Marlborough",
+   "fires": 3,
+   "years": "1653 1679 1690"
+  },
+  {
+   "town": "Chatteris",
+   "fires": 3,
+   "years": "1310 1706 1864"
+  },
+  {
+   "town": "Andover",
+   "fires": 2,
+   "years": "1141 1435"
+  },
+  {
+   "town": "Basingstoke",
+   "fires": 2,
+   "years": "1601 1656"
+  },
+  {
+   "town": "Edinburgh",
+   "fires": 2,
+   "years": "1700 1824"
+  },
+  {
+   "town": "Honiton",
+   "fires": 2,
+   "years": "1747 1765"
+  },
+  {
+   "town": "Dereham",
+   "fires": 2,
+   "years": "1581 1679"
+  },
+  {
+   "town": "Retford",
+   "fires": 2,
+   "years": "1528 1585"
+  },
+  {
+   "town": "Wincanton",
+   "fires": 2,
+   "years": "1707 1747"
+  },
+  {
+   "town": "Stony Stratford",
+   "fires": 2,
+   "years": "1736 1742"
+  },
+  {
+   "town": "Wolverhampton",
+   "fires": 2,
+   "years": "1590 1696"
+  }
+ ],
+ "regions": [
+  {
+   "region": "Eastern",
+   "towns": 141,
+   "burned": 23,
+   "share": 0.163,
+   "fires": 26
+  },
+  {
+   "region": "West Midlands",
+   "towns": 92,
+   "burned": 13,
+   "share": 0.141,
+   "fires": 14
+  },
+  {
+   "region": "South West",
+   "towns": 190,
+   "burned": 18,
+   "share": 0.095,
+   "fires": 25
+  },
+  {
+   "region": "South East",
+   "towns": 174,
+   "burned": 9,
+   "share": 0.052,
+   "fires": 15
+  },
+  {
+   "region": "East Midlands",
+   "towns": 91,
+   "burned": 4,
+   "share": 0.044,
+   "fires": 5
+  },
+  {
+   "region": "North East",
+   "towns": 55,
+   "burned": 2,
+   "share": 0.036,
+   "fires": 2
+  },
+  {
+   "region": "London",
+   "towns": 45,
+   "burned": 1,
+   "share": 0.022,
+   "fires": 5
+  },
+  {
+   "region": "Yorkshire and the Humber",
+   "towns": 104,
+   "burned": 2,
+   "share": 0.019,
+   "fires": 2
+  },
+  {
+   "region": "Wales",
+   "towns": 154,
+   "burned": 2,
+   "share": 0.013,
+   "fires": 2
+  },
+  {
+   "region": "North West",
+   "towns": 116,
+   "burned": 1,
+   "share": 0.009,
+   "fires": 1
+  }
+ ],
+ "rebuild_towns": [
+  "Biggleswade",
+  "Blandford Forum",
+  "Chatteris",
+  "Crowland",
+  "Dereham",
+  "Hingham",
+  "Honiton",
+  "Minehead",
+  "Newport",
+  "Stevenage",
+  "Wareham",
+  "Warwick",
+  "Wellington",
+  "Woburn"
+ ],
+ "panel": {
+  "towns": 1162,
+  "burned": 75,
+  "share_burned": 0.065,
+  "skipped": {
+   "not a place": 350,
+   "no location": 156,
+   "outside England and Wales": 13
+  },
+  "fire_towns_not_in_panel": [
+   "Hindon",
+   "Whitstable"
+  ],
+  "dom_radius_km": 2.5,
+  "lb_radius_km": 1.0
+ },
+ "cmp": {
+  "n": 1079,
+  "n_burned": 71,
+  "n_unburned": 1008,
+  "pop_median_burned": 13816,
+  "pop_median_unburned": 12248,
+  "chars_median_burned": 46908,
+  "chars_median_unburned": 31215,
+  "dom_median_burned": 64.0,
+  "dom_median_unburned": 19.0,
+  "dom_any_burned": 0.915,
+  "dom_any_unburned": 0.626,
+  "inc_median_burned": 51287,
+  "inc_median_unburned": 48495,
+  "pop_mw_p": 0.08196344724785094,
+  "chars_mw_p": 0.001000905927702476,
+  "inc_mw_p": 0.04192456627631245,
+  "chars_ratio": 1.5
+ },
+ "models": {
+  "size_raw": {
+   "coef": 0.2973665858225422,
+   "pct": 34.6,
+   "lo": 1.0,
+   "hi": 79.5,
+   "p": 0.04280910782587612,
+   "n": 1079,
+   "r2": 0.004
+  },
+  "size_region": {
+   "coef": 0.2192370110247678,
+   "pct": 24.5,
+   "lo": -6.5,
+   "hi": 65.8,
+   "p": 0.1338578480636186,
+   "n": 1079,
+   "r2": 0.106
+  },
+  "size_dom": {
+   "coef": 0.22157103461555794,
+   "pct": 24.8,
+   "lo": -6.4,
+   "hi": 66.4,
+   "p": 0.1314635720562346,
+   "n": 1079,
+   "r2": 0.106
+  },
+  "size_dom_chars": {
+   "coef": -0.06285760400877594,
+   "pct": -6.1,
+   "lo": -24.0,
+   "hi": 16.0,
+   "p": 0.5605052125219463,
+   "n": 1079,
+   "r2": 0.489
+  },
+  "income_raw": {
+   "coef": 0.03510455604887747,
+   "pct": 3.6,
+   "lo": -0.2,
+   "hi": 7.4,
+   "p": 0.06048987716804399,
+   "n": 1045,
+   "r2": 0.002
+  },
+  "income_size": {
+   "coef": -0.020577165697943465,
+   "pct": -2.0,
+   "lo": -5.2,
+   "hi": 1.3,
+   "p": 0.22292902181805607,
+   "n": 1045,
+   "r2": 0.401
+  },
+  "income_size_chars": {
+   "coef": -0.020744955601741475,
+   "pct": -2.1,
+   "lo": -5.3,
+   "hi": 1.3,
+   "p": 0.2246257263261353,
+   "n": 1045,
+   "r2": 0.401
+  },
+  "size_dom_incl_possible": {
+   "coef": 0.1986084217962563,
+   "pct": 22.0,
+   "lo": -7.7,
+   "hi": 61.1,
+   "p": 0.1621408451355678,
+   "n": 1079,
+   "r2": 0.106
+  },
+  "size_dom_1600_1799": {
+   "coef": -0.0880840740528399,
+   "pct": -8.4,
+   "lo": -33.4,
+   "hi": 25.9,
+   "p": 0.5881219479123901,
+   "n": 1053,
+   "r2": 0.105
+  },
+  "income_size_incl_possible": {
+   "coef": -0.013718114475830384,
+   "pct": -1.4,
+   "lo": -4.5,
+   "hi": 1.9,
+   "p": 0.40745170920660323,
+   "n": 1045,
+   "r2": 0.401
+  }
+ },
+ "market": {
+  "n": 177,
+  "n_burned": 20,
+  "pop_median_burned": 13040,
+  "pop_median_unburned": 9878,
+  "inc_median_burned": 52857,
+  "inc_median_unburned": 51721,
+  "size": {
+   "coef": -0.029471049151323613,
+   "pct": -2.9,
+   "lo": -37.6,
+   "hi": 51.1,
+   "p": 0.8960081188244504,
+   "n": 177,
+   "r2": 0.148
+  },
+  "income": {
+   "coef": -0.021620203483692535,
+   "pct": -2.1,
+   "lo": -7.4,
+   "hi": 3.4,
+   "p": 0.4452341321026916,
+   "n": 172,
+   "r2": 0.478
+  }
+ },
+ "matched": {
+  "pairs": 71,
+  "burned_bigger": 40,
+  "share_bigger": 0.563,
+  "median_ratio": 1.25,
+  "mean_log_ratio": 0.0526988213599827,
+  "wilcoxon_p": 0.6292341531955209,
+  "sign_p": 0.34247099841986794,
+  "distinct_matches": 67,
+  "inc_pairs": 70,
+  "inc_burned_higher": 28,
+  "inc_median_pct": -4.4,
+  "inc_wilcoxon_p": 0.034553076515611854,
+  "dom_abs_diff_median": 0.0
+ },
+ "c1377": {
+  "n": 41,
+  "n_burned": 5,
+  "burned_towns": [
+   "Bury St Edmunds",
+   "London",
+   "Northampton",
+   "Norwich",
+   "Shrewsbury"
+  ],
+  "median_growth_burned": 33.4,
+  "median_growth_unburned": 27.0,
+  "median_rank_change_burned": -4.0,
+  "median_rank_change_unburned": 1.0,
+  "mw_p_growth": 0.40311823623762
+ },
+ "c1377_rows": [
+  {
+   "town": "London",
+   "pop1377": 34971,
+   "rank1377": 1,
+   "pop2021": 8799742,
+   "rank2021": 1,
+   "burned": 1,
+   "fires": "1087 1133 1212 1633 1666"
+  },
+  {
+   "town": "York",
+   "pop1377": 10872,
+   "rank1377": 2,
+   "pop2021": 142114,
+   "rank2021": 17,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Bristol",
+   "pop1377": 9518,
+   "rank1377": 3,
+   "pop2021": 426501,
+   "rank2021": 2,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Plymouth",
+   "pop1377": 7256,
+   "rank1377": 4,
+   "pop2021": 265977,
+   "rank2021": 9,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Coventry",
+   "pop1377": 7226,
+   "rank1377": 5,
+   "pop2021": 340496,
+   "rank2021": 4,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Norwich",
+   "pop1377": 5928,
+   "rank1377": 6,
+   "pop2021": 198213,
+   "rank2021": 13,
+   "burned": 1,
+   "fires": "1507"
+  },
+  {
+   "town": "Lincoln",
+   "pop1377": 5354,
+   "rank1377": 7,
+   "pop2021": 103809,
+   "rank2021": 21,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Salisbury",
+   "pop1377": 4839,
+   "rank1377": 8,
+   "pop2021": 45739,
+   "rank2021": 29,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "King's Lynn",
+   "pop1377": 4691,
+   "rank1377": 9,
+   "pop2021": 48815,
+   "rank2021": 28,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Colchester",
+   "pop1377": 4432,
+   "rank1377": 10,
+   "pop2021": 131451,
+   "rank2021": 18,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Boston",
+   "pop1377": 4307,
+   "rank1377": 11,
+   "pop2021": 43697,
+   "rank2021": 30,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Beverley",
+   "pop1377": 3994,
+   "rank1377": 12,
+   "pop2021": 30384,
+   "rank2021": 35,
+   "burned": 0,
+   "fires": "1188"
+  },
+  {
+   "town": "Newcastle upon Tyne",
+   "pop1377": 3970,
+   "rank1377": 13,
+   "pop2021": 284471,
+   "rank2021": 6,
+   "burned": 0,
+   "fires": "1854"
+  },
+  {
+   "town": "Canterbury",
+   "pop1377": 3861,
+   "rank1377": 14,
+   "pop2021": 55421,
+   "rank2021": 26,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Bury St Edmunds",
+   "pop1377": 3668,
+   "rank1377": 15,
+   "pop2021": 41704,
+   "rank2021": 31,
+   "burned": 1,
+   "fires": "1608"
+  },
+  {
+   "town": "Oxford",
+   "pop1377": 3536,
+   "rank1377": 16,
+   "pop2021": 166279,
+   "rank2021": 14,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Gloucester",
+   "pop1377": 3358,
+   "rank1377": 17,
+   "pop2021": 117187,
+   "rank2021": 20,
+   "burned": 0,
+   "fires": "1222"
+  },
+  {
+   "town": "Leicester",
+   "pop1377": 3152,
+   "rank1377": 18,
+   "pop2021": 401652,
+   "rank2021": 3,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Shrewsbury",
+   "pop1377": 3123,
+   "rank1377": 19,
+   "pop2021": 75432,
+   "rank2021": 23,
+   "burned": 1,
+   "fires": "1394"
+  },
+  {
+   "town": "Great Yarmouth",
+   "pop1377": 2912,
+   "rank1377": 20,
+   "pop2021": 29605,
+   "rank2021": 36,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Hereford",
+   "pop1377": 2854,
+   "rank1377": 21,
+   "pop2021": 59910,
+   "rank2021": 24,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Cambridge",
+   "pop1377": 2853,
+   "rank1377": 22,
+   "pop2021": 149510,
+   "rank2021": 16,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Ely",
+   "pop1377": 2583,
+   "rank1377": 23,
+   "pop2021": 19346,
+   "rank2021": 39,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Exeter",
+   "pop1377": 2340,
+   "rank1377": 24,
+   "pop2021": 125371,
+   "rank2021": 19,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Worcester",
+   "pop1377": 2336,
+   "rank1377": 25,
+   "pop2021": 101556,
+   "rank2021": 22,
+   "burned": 0,
+   "fires": "1189"
+  },
+  {
+   "town": "Kingston upon Hull",
+   "pop1377": 2336,
+   "rank1377": 25,
+   "pop2021": 269895,
+   "rank2021": 8,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Ipswich",
+   "pop1377": 2260,
+   "rank1377": 27,
+   "pop2021": 150235,
+   "rank2021": 15,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Northampton",
+   "pop1377": 2216,
+   "rank1377": 28,
+   "pop2021": 239244,
+   "rank2021": 11,
+   "burned": 1,
+   "fires": "1675"
+  },
+  {
+   "town": "Nottingham",
+   "pop1377": 2170,
+   "rank1377": 29,
+   "pop2021": 298588,
+   "rank2021": 5,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Winchester",
+   "pop1377": 2160,
+   "rank1377": 30,
+   "pop2021": 49967,
+   "rank2021": 27,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Scarborough",
+   "pop1377": 2090,
+   "rank1377": 31,
+   "pop2021": 58220,
+   "rank2021": 25,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Stamford",
+   "pop1377": 1827,
+   "rank1377": 32,
+   "pop2021": 20751,
+   "rank2021": 38,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Newark-on-Trent",
+   "pop1377": 1767,
+   "rank1377": 33,
+   "pop2021": 28168,
+   "rank2021": 37,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Ludlow",
+   "pop1377": 1758,
+   "rank1377": 34,
+   "pop2021": 10714,
+   "rank2021": 41,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Southampton",
+   "pop1377": 1728,
+   "rank1377": 35,
+   "pop2021": 248921,
+   "rank2021": 10,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Pontefract",
+   "pop1377": 1628,
+   "rank1377": 36,
+   "pop2021": 32973,
+   "rank2021": 33,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Reading",
+   "pop1377": 1575,
+   "rank1377": 37,
+   "pop2021": 203842,
+   "rank2021": 12,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Derby",
+   "pop1377": 1569,
+   "rank1377": 38,
+   "pop2021": 273946,
+   "rank2021": 7,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Lichfield",
+   "pop1377": 1536,
+   "rank1377": 39,
+   "pop2021": 32582,
+   "rank2021": 34,
+   "burned": 0,
+   "fires": "1291"
+  },
+  {
+   "town": "Newbury",
+   "pop1377": 1500,
+   "rank1377": 40,
+   "pop2021": 39214,
+   "rank2021": 32,
+   "burned": 0,
+   "fires": ""
+  },
+  {
+   "town": "Wells",
+   "pop1377": 1352,
+   "rank1377": 41,
+   "pop2021": 11145,
+   "rank2021": 40,
+   "burned": 0,
+   "fires": ""
+  }
+ ],
+ "c1801": {
+  "n": 27,
+  "n_burned": 4,
+  "burned_towns": [
+   "London",
+   "Norwich",
+   "Shrewsbury",
+   "Wolverhampton"
+  ],
+  "median_growth_burned": 7.8,
+  "median_growth_unburned": 8.8,
+  "mw_p": 1.0
+ },
+ "c1801_rows": [
+  {
+   "town": "London",
+   "pop1801": 864845,
+   "pop2021": 8799742,
+   "growth": 10.2,
+   "burned": 1,
+   "region": "London"
+  },
+  {
+   "town": "Manchester",
+   "pop1801": 84020,
+   "pop2021": 469193,
+   "growth": 5.6,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Liverpool",
+   "pop1801": 77653,
+   "pop2021": 503714,
+   "growth": 6.5,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Birmingham",
+   "pop1801": 75670,
+   "pop2021": 1111347,
+   "growth": 14.7,
+   "burned": 0,
+   "region": "West Midlands"
+  },
+  {
+   "town": "Bristol",
+   "pop1801": 63645,
+   "pop2021": 426501,
+   "growth": 6.7,
+   "burned": 0,
+   "region": "South West"
+  },
+  {
+   "town": "Leeds",
+   "pop1801": 53162,
+   "pop2021": 532756,
+   "growth": 10.0,
+   "burned": 0,
+   "region": "Yorkshire and the Humber"
+  },
+  {
+   "town": "Plymouth",
+   "pop1801": 43194,
+   "pop2021": 265977,
+   "growth": 6.2,
+   "burned": 0,
+   "region": "South West"
+  },
+  {
+   "town": "Norwich",
+   "pop1801": 36832,
+   "pop2021": 198213,
+   "growth": 5.4,
+   "burned": 1,
+   "region": "Eastern"
+  },
+  {
+   "town": "Bath",
+   "pop1801": 32200,
+   "pop2021": 95048,
+   "growth": 3.0,
+   "burned": 0,
+   "region": "South West"
+  },
+  {
+   "town": "Portsmouth",
+   "pop1801": 32166,
+   "pop2021": 223317,
+   "growth": 6.9,
+   "burned": 0,
+   "region": "South East"
+  },
+  {
+   "town": "Sheffield",
+   "pop1801": 31314,
+   "pop2021": 495771,
+   "growth": 15.8,
+   "burned": 0,
+   "region": "Yorkshire and the Humber"
+  },
+  {
+   "town": "Kingston upon Hull",
+   "pop1801": 29516,
+   "pop2021": 269895,
+   "growth": 9.1,
+   "burned": 0,
+   "region": "Yorkshire and the Humber"
+  },
+  {
+   "town": "Nottingham",
+   "pop1801": 28861,
+   "pop2021": 298588,
+   "growth": 10.3,
+   "burned": 0,
+   "region": "East Midlands"
+  },
+  {
+   "town": "Newcastle upon Tyne",
+   "pop1801": 28366,
+   "pop2021": 284471,
+   "growth": 10.0,
+   "burned": 0,
+   "region": "North East"
+  },
+  {
+   "town": "Leicester",
+   "pop1801": 16953,
+   "pop2021": 401652,
+   "growth": 23.7,
+   "burned": 0,
+   "region": "East Midlands"
+  },
+  {
+   "town": "Exeter",
+   "pop1801": 16827,
+   "pop2021": 125371,
+   "growth": 7.5,
+   "burned": 0,
+   "region": "South West"
+  },
+  {
+   "town": "York",
+   "pop1801": 16145,
+   "pop2021": 142114,
+   "growth": 8.8,
+   "burned": 0,
+   "region": "Yorkshire and the Humber"
+  },
+  {
+   "town": "Coventry",
+   "pop1801": 16034,
+   "pop2021": 340496,
+   "growth": 21.2,
+   "burned": 0,
+   "region": "West Midlands"
+  },
+  {
+   "town": "Ashton-under-Lyne",
+   "pop1801": 15632,
+   "pop2021": 48918,
+   "growth": 3.1,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Great Yarmouth",
+   "pop1801": 14845,
+   "pop2021": 29605,
+   "growth": 2.0,
+   "burned": 0,
+   "region": "Eastern"
+  },
+  {
+   "town": "Dover",
+   "pop1801": 14845,
+   "pop2021": 36045,
+   "growth": 2.4,
+   "burned": 0,
+   "region": "South East"
+  },
+  {
+   "town": "Stockport",
+   "pop1801": 14830,
+   "pop2021": 119579,
+   "growth": 8.1,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Shrewsbury",
+   "pop1801": 14739,
+   "pop2021": 75432,
+   "growth": 5.1,
+   "burned": 1,
+   "region": "West Midlands"
+  },
+  {
+   "town": "Wolverhampton",
+   "pop1801": 12565,
+   "pop2021": 235339,
+   "growth": 18.7,
+   "burned": 1,
+   "region": "West Midlands"
+  },
+  {
+   "town": "Bolton",
+   "pop1801": 12549,
+   "pop2021": 184302,
+   "growth": 14.7,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Oldham",
+   "pop1801": 12024,
+   "pop2021": 111469,
+   "growth": 9.3,
+   "burned": 0,
+   "region": "North West"
+  },
+  {
+   "town": "Blackburn",
+   "pop1801": 11980,
+   "pop2021": 120469,
+   "growth": 10.1,
+   "burned": 0,
+   "region": "North West"
+  }
+ ],
+ "listed": {
+  "towns": 134,
+  "burned": 8,
+  "unburned": 117,
+  "geo_share_burned": 0.29,
+  "geo_share_unburned": 0.199,
+  "pre1700_share_burned": 0.506,
+  "pre1700_share_unburned": 0.507,
+  "geo_mw_p": 0.22892781627959136,
+  "pre_mw_p": 0.8991601822061576,
+  "dated_total": 1459,
+  "share_dated_near_towns": 0.174
+ },
+ "london": {
+  "pop2021": 8799742,
+  "pop1377": 34971,
+  "pop1801": 864845,
+  "fires": "1087 1133 1212 1633 1666",
+  "n_fires": 5
+ },
+ "highlights": {
+  "london": {
+   "town": "London",
+   "year": 1666,
+   "houses": 13200,
+   "unit": "houses"
+  },
+  "northampton": {
+   "town": "Northampton",
+   "year": 1675,
+   "houses": 600,
+   "unit": "homes"
+  },
+  "warwick": {
+   "town": "Warwick",
+   "year": 1694,
+   "houses": 460,
+   "unit": "buildings"
+  },
+  "blandford": {
+   "town": "Blandford Forum",
+   "year": 1731,
+   "houses": null,
+   "unit": NaN
+  },
+  "tiverton": {
+   "town": "Tiverton",
+   "year": 1731,
+   "houses": 298,
+   "unit": "houses"
+  },
+  "tiverton1612": {
+   "town": "Tiverton",
+   "year": 1612,
+   "houses": 600,
+   "unit": "houses"
+  },
+  "wem": {
+   "town": "Wem",
+   "year": 1677,
+   "houses": 140,
+   "unit": "dwelling houses"
+  },
+  "marlborough": {
+   "town": "Marlborough",
+   "year": 1653,
+   "houses": 244,
+   "unit": "houses"
+  },
+  "norwich": {
+   "town": "Norwich",
+   "year": 1507,
+   "houses": 718,
+   "unit": "houses"
+  },
+  "buckingham": {
+   "town": "Buckingham",
+   "year": 1725,
+   "houses": 138,
+   "unit": "dwellings"
+  },
+  "chudleigh": {
+   "town": "Chudleigh",
+   "year": 1807,
+   "houses": 180,
+   "unit": "houses"
+  },
+  "dorchester": {
+   "town": "Dorchester",
+   "year": 1613,
+   "houses": 300,
+   "unit": "houses"
+  },
+  "wymondham": {
+   "town": "Wymondham",
+   "year": 1615,
+   "houses": 300,
+   "unit": "properties"
+  },
+  "edinburgh": {
+   "town": "Edinburgh",
+   "year": 1824,
+   "houses": 400,
+   "unit": "homes"
+  },
+  "pop2021": {
+   "Blandford Forum": 12941,
+   "Warwick": 35943,
+   "Northampton": 239244,
+   "Wem": 6282,
+   "Tiverton": 20717,
+   "Marlborough": 9128,
+   "Buckingham": 14292,
+   "Wareham": 5881
+  },
+  "tiverton_years": "1598 1612 1731",
+  "marlborough_years": "1653 1679 1690",
+  "london_churches": "86 or 87"
+ }
+}
