@@ -421,5 +421,6 @@ resp(document.getElementById("models"), (W, nar) => {
 document.getElementById("t1377").innerHTML = `<thead><tr><th>Town</th><th class="num">1377</th><th class="num">Rank</th><th class="num">2021</th><th class="num">Rank</th><th class="wide">Great fires</th></tr></thead><tbody>` +
   R.c1377_rows.map(r => `<tr><td><span class="dot" style="background:var(${r.burned ? "--hot" : "--cold"})"></span>${esc(r.town)}</td><td class="num">${fmt(r.pop1377)}</td><td class="num">${r.rank1377}</td><td class="num">${fmt(r.pop2021)}</td><td class="num">${r.rank2021}</td><td class="wide">${esc(r.fires)}</td></tr>`).join("") + "</tbody>";
 </script>
+<script src="https://tristan-hotham.github.io/assets/site-nav.js" defer></script>
 </body>
 </html>
